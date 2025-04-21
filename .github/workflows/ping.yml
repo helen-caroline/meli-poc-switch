@@ -1,0 +1,13 @@
+name: Teste de Ping
+
+on:
+  push:
+    branches:
+        - main
+
+jobs:
+  ping_test:
+    runs-on: self-hosted  # Usa o runner auto-hospedado
+    steps:
+      - name: Executar ping para p swicth com 4 tentativas
+        run: ping -c 4 192.168.15.20
