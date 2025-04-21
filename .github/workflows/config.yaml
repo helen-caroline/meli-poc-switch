@@ -3,7 +3,7 @@ name: Configurar Switches Dev
 on:
   push:
     branches:
-      - main
+      - auto-switch
     paths:
       - 'host-dev\automation-networks\SwitchAruba\script-config.py'
 

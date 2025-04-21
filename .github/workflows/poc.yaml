@@ -3,7 +3,7 @@ name: Configurar Switches
 on:
   push:
     branches:
-      - main
+      - auto-switch
     paths:
       - 'config/switches/poc-config'
 
