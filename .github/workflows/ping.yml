@@ -3,7 +3,7 @@ name: Teste de Ping
 on:
   push:
     branches:
-        - main
+        - teste-ping
 
 jobs:
   ping_test:
