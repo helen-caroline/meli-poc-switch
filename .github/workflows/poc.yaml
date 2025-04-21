@@ -1,0 +1,53 @@
+name: Configurar Switches
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'config/switches/poc-config'
+
+jobs:
+  update-switch-config:
+    runs-on: lxn-auto-poc
+
+    env:
+      RUNNER_SWITCH_IP: ${{ secrets.SWITCH_IP }}
+      RUNNER_TFTP_SERVER: ${{ secrets.TFTP_SERVER }}
+      RUNNER_SWITCH_USERNAME: ${{ secrets.SWITCH_USERNAME }}
+      RUNNER_SWITCH_PASSWORD: ${{ secrets.SWITCH_PASSWORD }}
+      
+    steps:
+    - name: Checkout repo
+      uses: actions/checkout@v2
+      
+    - name: Copiar arquivo com valores substituídos para /tftp no runner
+      run: yes | cp -rf config/switches/poc-config /tftp
+      
+    - name: Substituir valor-secret no arquivo
+      run: |
+        sed -i "s/valor-secret/${{ secrets.SWITCH_PASSWORD_ENC }}/g" /tftp/poc-config
+      
+    - name: Set commit message
+      id: commit-message
+      run: |
+        echo "COMMIT_MESSAGE=$(git log -1 --pretty=format:%s -- config/switches/poc-config)" >> $GITHUB_ENV
+
+    - name: Check commit message and run script
+      if: contains(env.COMMIT_MESSAGE, 'delete')
+      run: python3 config/switches/script-delete.py
+      
+      env:
+        TFTP_FILE: /tftp/poc-config
+        RUNNER_SWITCH_PASSWORD: ${{ secrets.SWITCH_PASSWORD }}
+
+    - name: Check commit message and run script
+      if: contains(env.COMMIT_MESSAGE, 'update')
+      run: python3 config/switches/script-apply.py
+      
+      env:
+        TFTP_FILE: /tftp/poc-config
+        RUNNER_SWITCH_PASSWORD: ${{ secrets.SWITCH_PASSWORD }}
+
+    - name: Deletar arquivo do runner
+      run: rm -rf /tftp/poc-config
