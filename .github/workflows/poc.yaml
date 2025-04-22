@@ -19,12 +19,8 @@ jobs:
       env:
         TFTP_FILE: /tftp/poc-config
 
-    - name: Transferir arquivo para o servidor TFTP
-      run: scp /tftp/poc-config root@192.168.15.100:/tftpboot/
-      env:
-        TFTP_SERVER: 192.168.15.100
-        TFTP_USER: root
-        TFTP_PASSWORD: admin123
+    - name: Copiar arquivo para o diretório do servidor TFTP
+      run: sudo cp /tftp/poc-config /tftpboot/
 
     - name: Executar script para aplicar configuração no switch
       run: python3 config/switches/script-apply.py
