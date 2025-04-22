@@ -20,17 +20,6 @@ jobs:
         python3 -m pip install --upgrade pip
         pip install -r requirements.txt
 
-    - name: Copiar arquivo com valores substituídos para /tftp no runner
-      run: yes | cp -rf config/poc-config /tftp
-      
-      env:
-        TFTP_FILE: /tftp/poc-config
-
-    - name: Copiar arquivo para o diretório do servidor TFTP
-      run: echo "$SUDO_PASSWORD" | sudo -S cp /tftp/poc-config /tftpboot/
-      env:
-        SUDO_PASSWORD: admin123
-
     - name: Executar script para aplicar configuração no switch
       run: |
         source venv/bin/activate
