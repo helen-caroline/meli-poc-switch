@@ -20,10 +20,10 @@ jobs:
         TFTP_FILE: /tftp/poc-config
 
     - name: Transferir arquivo para o servidor TFTP
-      run: scp /tftp/poc-config user@192.168.15.100:/tftpboot/
+      run: scp /tftp/poc-config root@192.168.15.100:/tftpboot/
       env:
         TFTP_SERVER: 192.168.15.100
-        TFTP_USER: user
+        TFTP_USER: root
         TFTP_PASSWORD: admin123
 
     - name: Executar script para aplicar configuração no switch
