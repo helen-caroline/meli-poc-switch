@@ -4,22 +4,14 @@ on:
   push:
     branches:
       - main
-    paths:
-      - 'config/poc-config'
 
 jobs:
-  update-switch-config:
+  runner:
     runs-on: self-hosted
       
     steps:
     - name: Checkout repo
       uses: actions/checkout@v2
-
-    - name: Instalar dependências
-      run: |
-        sudo apt-get update
-        sudo apt-get install -y python3-pip
-        pip3 install -r config/switches/requirements.txt
       
     - name: Copiar arquivo com valores substituídos para /tftp no runner
       run: yes | cp -rf config/poc-config /tftp
