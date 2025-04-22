@@ -3,8 +3,9 @@
 !System Software Version Virtual.10.07.0004
 !
 configure terminal
-interface mgmt
-ip address 192.168.15.50/24
-no shutdown
-write memory
+interface 1/1/1
+description Configurado via SSH
+vlan 10
+name RODEI O ACTION
 exit
+write memory

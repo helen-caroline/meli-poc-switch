@@ -6,16 +6,13 @@ switch_ip = "192.168.15.20"
 username = "admin"
 password = "admin123"
 
-# Comandos para configurar o switch
-commands = [
-    "configure terminal",
-    "interface 1/1/1",
-    "description Configurado via SSH",
-    "vlan 10",
-    "name RODEI O ACTION",
-    "exit",
-    "write memory"
-]
+# Carregar comandos do arquivo poc-config
+commands = []
+with open("config/poc-config", "r") as file:
+    for line in file:
+        # Ignorar linhas de comentário ou vazias
+        if not line.startswith("!") and line.strip():
+            commands.append(line.strip())
 
 # Conectar ao switch via SSH
 try:
