@@ -4,7 +4,7 @@ import time
 # Configurações do switch
 switch_ip = "192.168.15.20"
 username = "admin"
-password = "admin_password"
+password = "admin123"
 
 # Comandos para configurar o switch
 commands = [
