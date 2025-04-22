@@ -1,57 +1,10 @@
 !Current Configuration:
-!System Description "Dell Networking N3024, 6.1.0.6, Linux 3.6.5-320b2282"
-!System Software Version 6.1.0.6
+!System Description "EVE-NG : ArubaOS-CX"
+!System Software Version Virtual.10.07.0004
 !
-configure
-vlan 10
-name "TESTE0"
-exit
-vlan 100
-name "TESTE1"
-exit
-vlan 200
-name "TESTE10"
-exit
-vlan 255
-name "MGMT"
-exit
-vlan 10,100,200,255
-exit
-ip telnet server disable
-hostname "POC-AUTOMACAO-10"
-slot 1/0 1    ! Dell Networking N3024
-stack
-member 1 1    ! N3024
-exit
-ip default-gateway 192.168.255.1
-ip route 0.0.0.0 0.0.0.0 192.168.255.1 253
-interface vlan 1
-ip address dhcp
-exit
-interface vlan 10
-exit
-interface vlan 100
-exit
-interface vlan 200
-exit
-interface vlan 255
-ip address 192.168.255.149 255.255.255.0
-exit
-username "admin" password valor-secret privilege 15 encrypted
-ip ssh server
-!
-interface Gi1/0/1
-switchport access vlan 255
-exit
-!
-interface Gi1/0/23
-switchport mode trunk
-switchport trunk allowed vlan 255
-exit
-!
-interface Gi1/0/24
-switchport mode trunk
-switchport trunk allowed vlan 255
-exit
-snmp-server engineid local 800002a203f8b1567237de
+configure terminal
+interface mgmt
+ip address 192.168.15.50/24
+no shutdown
+write memory
 exit
