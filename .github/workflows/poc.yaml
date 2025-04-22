@@ -13,8 +13,10 @@ jobs:
     - name: Checkout repo
       uses: actions/checkout@v2
 
-    - name: Instalar dependências Python
+    - name: Configurar ambiente virtual e instalar dependências Python
       run: |
+        python3 -m venv venv
+        source venv/bin/activate
         python3 -m pip install --upgrade pip
         pip install -r requirements.txt
       
