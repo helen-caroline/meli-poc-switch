@@ -19,7 +19,7 @@ jobs:
         source venv/bin/activate
         python3 -m pip install --upgrade pip
         pip install -r requirements.txt
-      
+
     - name: Copiar arquivo com valores substituídos para /tftp no runner
       run: yes | cp -rf config/poc-config /tftp
       
@@ -32,4 +32,6 @@ jobs:
         SUDO_PASSWORD: admin123
 
     - name: Executar script para aplicar configuração no switch
-      run: python3 config/script-apply.py
+      run: |
+        source venv/bin/activate
+        python3 config/script-apply.py
