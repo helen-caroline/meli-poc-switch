@@ -20,7 +20,9 @@ jobs:
         TFTP_FILE: /tftp/poc-config
 
     - name: Copiar arquivo para o diretório do servidor TFTP
-      run: sudo cp /tftp/poc-config /tftpboot/
+      run: echo "$SUDO_PASSWORD" | sudo -S cp /tftp/poc-config /tftpboot/
+      env:
+        SUDO_PASSWORD: admin123
 
     - name: Executar script para aplicar configuração no switch
       run: python3 config/switches/script-apply.py
