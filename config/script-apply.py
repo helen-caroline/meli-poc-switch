@@ -12,7 +12,7 @@ commands = [
     "interface 1/1/1",
     "description Configurado via SSH",
     "vlan 10",
-    "name VLAN_TESTE",
+    "name RODEI O ACTION",
     "exit",
     "write memory"
 ]
