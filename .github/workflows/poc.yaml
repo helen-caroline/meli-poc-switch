@@ -12,6 +12,11 @@ jobs:
     steps:
     - name: Checkout repo
       uses: actions/checkout@v2
+
+    - name: Instalar dependências Python
+      run: |
+        python3 -m pip install --upgrade pip
+        pip install -r requirements.txt
       
     - name: Copiar arquivo com valores substituídos para /tftp no runner
       run: yes | cp -rf config/poc-config /tftp
